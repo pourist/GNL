@@ -1,11 +1,6 @@
 ```markdown
 # 📄 get_next_line
 
-[![Language](https://img.shields.io/badge/language-C-blue.svg)](https://en.wikipedia.org/wiki/C_(programming_language))
-[![Norminette](https://img.shields.io/badge/style-42%20Norm-blue)](https://github.com/42School/norminette)
-[![License: MIT](https://img.shields.io/badge/license-42%20School-blue)](https://github.com/42School)
-[![Status](https://img.shields.io/badge/status-in%20progress-yellow)]()
-
 **Get Next Line** is a 42 project focused on implementing a function that reads a file descriptor line by line.  
 This function must handle memory management, file reading with buffers, and optional support for multiple file descriptors.
 
@@ -14,7 +9,7 @@ This function must handle memory management, file reading with buffers, and opti
 ## 📦 Overview
 
 - **Function:** `char *get_next_line(int fd);`
-- **Language:** C  
+- **Language:** C
 - **Compilation:** `-Wall -Wextra -Werror`
 - **BUFFER_SIZE:** Defined at compile time with `-D BUFFER_SIZE=n`
 - **Makefile Rules:** `make`, `make bonus`, `make clean`, `make fclean`, `make re`
@@ -123,3 +118,5 @@ int main(void)
 42 Berlin  
 [github.com/pourist](https://github.com/pourist)
 ```
+
+---
