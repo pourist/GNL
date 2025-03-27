@@ -1,114 +1,104 @@
 ```markdown
 # 📄 get_next_line
 
-**Get Next Line** is a 42 project focused on implementing a function that reads a file descriptor line by line.  
-This function must handle memory management, file reading with buffers, and optional support for multiple file descriptors.
+> 42 project to implement a function that reads a line from a file descriptor.  
+> Handles memory allocation, static storage, and supports multiple file descriptors (bonus).
 
 ---
 
-## 📦 Overview
+## 🧠 Description
 
-- **Function:** `char *get_next_line(int fd);`
-- **Language:** C
-- **Compilation:** `-Wall -Wextra -Werror`
-- **BUFFER_SIZE:** Defined at compile time with `-D BUFFER_SIZE=n`
-- **Makefile Rules:** `make`, `make bonus`, `make clean`, `make fclean`, `make re`
+The goal of this project is to implement the `get_next_line` function, which reads from a file descriptor one line at a time.
 
----
+The function should return:
+- A line ending with `\n`, or
+- The last line if EOF is reached without a newline, or
+- `NULL` if nothing is left to read or an error occurs.
 
-## 🧠 Project Scope
+This function must handle partial reads using a user-defined `BUFFER_SIZE` and manage memory efficiently with static variables.
 
-### 🔹 Mandatory
-
-- Returns the next line from a file descriptor.
-- Each call reads only what is needed until `\n` or EOF.
-- Uses a static variable to store leftover data between calls.
-- Must return `NULL` when nothing is left to read or on error.
-- Files:
-  - `get_next_line.c`
-  - `get_next_line_utils.c`
-  - `get_next_line.h`
-
-### 🔸 Bonus
-
-- Supports reading from multiple file descriptors simultaneously.
-- Uses only one static variable per fd.
-- Files:
-  - `get_next_line_bonus.c`
-  - `get_next_line_utils_bonus.c`
-  - `get_next_line_bonus.h`
+In the bonus version, the function must work with multiple file descriptors at the same time, preserving their states independently.
 
 ---
 
-## 📁 File Structure
+## 💡 Prototype
+
+```c
+char *get_next_line(int fd);
+```
+
+- **fd:** File descriptor to read from.
+- **Return:** A line read from `fd`, including the newline character if present.
+
+---
+
+## 🧰 Usage
+
+### Compile with Makefile
+
+```bash
+make        # Compile mandatory version
+make bonus  # Compile bonus version (multi-fd)
+```
+
+### Use in your project
+
+```c
+#include "get_next_line.h"            // or get_next_line_bonus.h
+```
+
+Compile with:
+
+```bash
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 \
+	src/get_next_line.c src/get_next_line_utils.c \
+	-o gnl_test
+```
+
+Or for bonus:
+
+```bash
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 \
+	src/get_next_line_bonus.c src/get_next_line_utils_bonus.c \
+	-o gnl_bonus_test
+```
+
+---
+
+## 🗂 File Structure
 
 ```
 .
 ├── include/
 │   ├── get_next_line.h
 │   └── get_next_line_bonus.h
-└── src/
-    ├── get_next_line.c
-    ├── get_next_line_utils.c
-    ├── get_next_line_bonus.c
-    └── get_next_line_utils_bonus.c
+├── src/
+│   ├── get_next_line.c
+│   ├── get_next_line_utils.c
+│   ├── get_next_line_bonus.c
+│   └── get_next_line_utils_bonus.c
+├── Makefile
+└── README.md
 ```
 
 ---
 
-## ⚙️ Compilation
+## 🌟 Bonus
 
-### Compile with default BUFFER_SIZE
-
-```bash
-make
-```
-
-### Compile with bonus (multi-fd support)
-
-```bash
-make bonus
-```
-
-### Example manual build
-
-```bash
-cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 \
-    src/get_next_line.c src/get_next_line_utils.c \
-    -Iinclude -o gnl_test
-```
+✅ Supports reading from multiple file descriptors simultaneously  
+✅ One static variable per file descriptor  
+✅ Fully memory-safe  
+✅ Norm-compliant
 
 ---
 
-## 🧪 Example Usage
+## ⚠️ Constraints
 
-```c
-#include "get_next_line.h"
-#include <fcntl.h>
-#include <stdio.h>
-
-int main(void)
-{
-	int fd = open("file.txt", O_RDONLY);
-	char *line;
-
-	while ((line = get_next_line(fd)))
-	{
-		printf("%s", line);
-		free(line);
-	}
-	close(fd);
-	return 0;
-}
-```
-
----
-
-## ⚠️ Notes
-
-- You are **not allowed to use libft**.
-- `lseek` and global variables are **forbidden**.
-- Your function should work with `BUFFER_SIZE` values from `1` to `9999+`.
+- No use of `lseek`, `read` only.
+- No global variables.
+- No use of `libft`.
+- Memory must be freed properly.
+- Must compile with or without `-D BUFFER_SIZE`.
 
 ---
 
@@ -117,6 +107,5 @@ int main(void)
 **Pouriya Pourbahrami**  
 42 Berlin  
 [github.com/pourist](https://github.com/pourist)
-```
 
----
+```
