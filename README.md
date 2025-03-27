@@ -1,7 +1,4 @@
----
-
-```markdown
-# 📄 get_next_line
+## 📄 get_next_line
 
 > 42 project to implement a function that reads a line from a file descriptor.  
 > Handles memory allocation, static storage, and supports multiple file descriptors (bonus).
